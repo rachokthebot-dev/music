@@ -1,0 +1,18 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Music apps</title>
+<style>body{font:16px system-ui;display:grid;place-items:center;min-height:90vh;margin:0;background:#111;color:#ddd}</style>
+<p id="m">Finding the music apps…</p>
+<script>
+// Forwards rachokthebot-dev.github.io/music/<path> to the current tunnel + <path>.
+// tunnel.json is rewritten by ~/claude/update-music-url.sh each time the tunnel restarts.
+const rest = location.pathname.replace(/^\/music\/?/, '/') + location.search + location.hash;
+fetch('/music/tunnel.json?t=' + Date.now(), { cache: 'no-store' })
+  .then(r => r.json())
+  .then(d => {
+    if (!d.url) throw 0;
+    location.replace(d.url.replace(/\/$/, '') + rest);
+  })
+  .catch(() => { document.getElementById('m').textContent = 'Music apps are offline right now.'; });
+</script>
