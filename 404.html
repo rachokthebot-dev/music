@@ -6,7 +6,7 @@
 <p id="m">Finding the music apps…</p>
 <script>
 // Forwards rachokthebot-dev.github.io/music/<path> to the current tunnel + <path>.
-// tunnel.json is rewritten by ~/claude/update-music-url.sh each time the tunnel restarts.
+// tunnel.json is rewritten by ~/claude/bin/update-music-url.sh each time the tunnel restarts.
 const rest = location.pathname.replace(/^\/music\/?/, '/') + location.search + location.hash;
 fetch('/music/tunnel.json?t=' + Date.now(), { cache: 'no-store' })
   .then(r => r.json())
